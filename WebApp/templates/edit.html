@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h1>食材管理画面</h1>
+<h2>{{ user_name }}</h2>
+<form method="GET" action="/add">
+    <button type="submit">追加</button>
+</form>
+
+<form method="POST" action="{{ url_for('deleteIngredients') }}">
+    <ul>
+        {% for ingredient in ingredients %}
+        <li>
+            <input type="checkbox" name="ingredients" value="{{ ingredient.name }}">
+            <label>食材名: {{ ingredient.name }} - {{ ingredient.quantity }}{{ ingredient.unit }} - {{
+                ingredient.expiry_date }}</label>
+        </li>
+        {% endfor %}
+    </ul>
+    <button type="submit">選択した食材を削除</button>
+</form>
+
+<form method="GET" action="/">
+    <button type="submit">食材リスト画面に戻る</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>テキストボックス追加</title>
+    <!-- CSSファイルのリンク -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>テキストボックス追加</h1>
+    <form id="textBoxForm" action="/result" method="post">
+        <!-- 最初の入力フィールドセット -->
+        <div class="form-group">
+            <label>食材名: </label>
+            <input type="text" id="name" name="name" required minlength="1" maxlength="10" size="10" />
+            <label>食材の量: </label>
+            <input type="text" id="quantity" name="quantity" required minlength="1" maxlength="4" size="10" />
+            <label>食材の単位: </label>
+            <input type="text" id="unit" name="unit" required minlength="1" maxlength="4" size="10" />
+        </div>
+        <!-- ボタンのコンテナ -->
+        <div class="button-container">
+            <input type="submit" class="submit-button" value="再読取り">
+            <button type="button" class="add-button" onclick="addTextBoxes()">テキストボックスを追加</button>
+            <input type="submit" class="submit-button" value="完了">
+        </div>
+    </form>
+    <script>
+        function addTextBoxes() {
+            const form = document.getElementById("textBoxForm");
+
+            // 新しい入力フィールドセットを作成
+            const formGroup = document.createElement("div");
+            formGroup.className = "form-group";
+
+            const nameLabel = document.createElement("label");
+            nameLabel.innerHTML = "食材名: ";
+            const nameBox = document.createElement("input");
+            nameBox.type = "text";
+            nameBox.id = "name";
+            nameBox.name = "name";
+            nameBox.required = true;
+            nameBox.minLength = 1;
+            nameBox.maxLength = 10;
+            nameBox.size = 10;
+
+            const quantityLabel = document.createElement("label");
+            quantityLabel.innerHTML = "食材の量: ";
+            const quantityBox = document.createElement("input");
+            quantityBox.type = "text";
+            quantityBox.id = "quantity";
+            quantityBox.name = "quantity";
+            quantityBox.required = true;
+            quantityBox.minLength = 1;
+            quantityBox.maxLength = 4;
+            quantityBox.size = 10;
+
+            const unitLabel = document.createElement("label");
+            unitLabel.innerHTML = "食材の単位: ";
+            const unitBox = document.createElement("input");
+            unitBox.type = "text";
+            unitBox.id = "unit";
+            unitBox.name = "unit";
+            unitBox.required = true;
+            unitBox.minLength = 1;
+            unitBox.maxLength = 4;
+            unitBox.size = 10;
+
+            formGroup.appendChild(nameLabel);
+            formGroup.appendChild(nameBox);
+            formGroup.appendChild(quantityLabel);
+            formGroup.appendChild(quantityBox);
+            formGroup.appendChild(unitLabel);
+            formGroup.appendChild(unitBox);
+
+            // フォームの完了ボタンの前に新しい入力フィールドセットを挿入
+            form.insertBefore(formGroup, document.querySelector('.button-container'));
+        }
+    </script>
+</body>
+</html>

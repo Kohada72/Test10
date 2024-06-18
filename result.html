@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+<style>
+    .button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .button:hover {
+        background-color: #0056b3;
+    }
+</style>
+{% block body %}
+<h1>追加する食材一覧</h1>
+{% for ingredient in ingredients  %}
+<h2>食材名 : {{ ingredient.name }} - {{ ingredient.quantity }}{{ ingredient.unit }} - {{ ingredient.expiry_date }}</h2>
+{% endfor %}
+<!-- ボタン風リンク -->
+<form method="GET" action="/">
+    <button type="submit">食材管理画面に戻る</button>
+</form>
+
+{% endblock %}

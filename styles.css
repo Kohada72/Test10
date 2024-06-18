@@ -1,0 +1,71 @@
+/* 全体のボディスタイル */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* フォームのマージン */
+form {
+    margin-top: 20px;
+}
+
+/* フォームグループのマージン */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* ラベルのスタイル */
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* テキスト入力のスタイル */
+input[type="text"] {
+    width: 200px;
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+/* ボタンのコンテナスタイル */
+.button-container {
+    display: flex;
+    margin-bottom: 10px; /* ボタンとボタンの間隔を10ピクセルに指定 */
+    justify-content: space-between;
+    position: fixed;
+    bottom: 20px; /* 画面下部からの距離 */
+    width: calc(100% - 40px); /* マージンを考慮した幅 */
+    left: 20px;
+    right: 20px;
+}
+
+/* 追加ボタンのスタイル */
+.add-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    width: 30%; /* ボタンの幅を設定 */
+}
+
+/* 完了ボタンのスタイル */
+.submit-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    width: 30%; /* ボタンの幅を設定 */
+}
+
+/* ボタンのホバースタイル */
+.add-button:hover, .submit-button:hover {
+    background-color: #45a049;
+}

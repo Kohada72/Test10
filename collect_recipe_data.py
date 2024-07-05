@@ -31,8 +31,8 @@ def getRecipe(ingredient_names):
     else:
         get_id_list = flat_id_list[:len(flat_id_list)]
 
+    recipe_list = []
     for data in getRecipeData(get_id_list):
-        recipe_list = []
         tmp_class = RECIPE()
         tmp_class.recipe_name = data.get('recipe_name', '')
         tmp_class.recipe_uri = str(data.get('_id', ''))

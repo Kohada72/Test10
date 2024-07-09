@@ -11,6 +11,7 @@ V1.0 : 和田一真  2024.07.02  初期バージョン
 """
 
 from get_recipe import getRecipeId, getRecipeData
+from bson import ObjectId
 
 class RECIPE:
     def __init__(self):
@@ -48,10 +49,16 @@ def getRecipe(ingredient_names):
 
     return recipe_list
 
-"""
-テストコード
-names = ["tamago", "mitsuba"]
-rst = getRecipe(names)
-print(f"Recipe Name: {rst[0].recipe_name}")
-print(f"Recipe URI: {rst[0].recipe_uri}")
-"""
+def getRecipeFromUri(uri):    
+    id = [ObjectId(uri)]
+    recipe_data = getRecipeData(id)[0]
+    recipe = RECIPE()
+    recipe.recipe_name = recipe_data.get('recipe_name', '')
+    recipe.recipe_uri = str(recipe_data.get('_id', ''))
+    recipe.ingredient_list = {ingredient['ingredient']: ingredient['quantity']
+            for ingredient in recipe_data.get('ingredients', [])}
+    recipe.instracts = [
+        recipe_data['method'][key]
+        for key in sorted(recipe_data['method'].keys())
+    ]
+    return recipe

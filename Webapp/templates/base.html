@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/styles.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <div class = "content">
+            
+        <aside class = "sidebar">
+            <ul>
+                <form action = "/", method = "GET">
+                    <li> <button type = "submit">食材管理</button> </li>
+                </form>
+                <form action = "/recipeSearch", method = "GET">
+                    <li> <button type = "submit">レシピ検索</button> </li>
+                </form>
+
+                    <li><br><br></li>
+
+                <form action = "/login", methid = "GET">
+                    <li> <button type = "submit">ログアウト</button> </li>
+                </form>
+            </ul>
+        </aside>
+
+        <div class = "main">
+            {% block body %}{% endblock %}
+        </div>
+    </div>
+</body>
+</html>

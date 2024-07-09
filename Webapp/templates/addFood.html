@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h2>食材の追加</h2>
+
+<div class = "add_options">
+    <form action = "/add/normal" method = "GET">
+        <button type =" submit">手動入力</button>
+    </form>
+
+    <form action = "/imageReco">
+        <button type = "submit">画像読込</button>
+    </form>
+</div>
+{% endblock %}

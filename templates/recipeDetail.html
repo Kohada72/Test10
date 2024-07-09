@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1>{{ recipe.recipe_name }}</h2>
+    <br>
+
+    <h2>材料</h2>
+    <p>{{recipe.ingredient_list}}</p>
+
+    <h2>手順</h2>
+    {% for i in recipe.instracts %}
+        <p>{{i}}</p>
+    {% endfor %}
+
+{% endblock %}

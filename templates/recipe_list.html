@@ -1,0 +1,20 @@
+{%extends 'base.html'%}
+
+{% block head %}
+    <title>レシピ一覧画面</title>
+{% endblock %}
+
+{% block body %}
+    <h1>レシピ一覧</h1>
+    <ul class = "recipe_list">
+    {% for i in rcl %}
+    <li>
+        <a href = "{{ url_for('recipeDetail',uri = i.recipe_uri) }}">
+            <img src = "{{url_for('static', filename = '/images/'+ i.recipe_uri + '.jpg')}}" alt="画像"> 
+        </a>
+        <p>{{i.recipe_name}}</p>
+    </li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}

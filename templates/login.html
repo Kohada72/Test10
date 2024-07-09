@@ -1,0 +1,44 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/styles.css') }}">
+</head>
+
+<body>
+    <div class="login-body">
+        <div class = "login-container">
+            <h2>ログイン</h2>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                    {% for message in messages %}
+                        <li class = "flush">{{message}}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+           {% endwith %}
+           
+            <form action = "/login" method = "POST">
+                
+
+                <div class = "login-group">
+                    <label for = "userID">ユーザID</label>
+                    <input type = "text" name = "userID" id="userID"> 
+                </div>
+                
+                <div class = "login-group">
+                    <label for = "passward">パスワード</label>
+                    <input type = "text" name = "passward" > 
+                </div>
+
+                <br>
+                    
+                <button type = "submit">ログイン</button>
+
+            </form>
+    </div>
+</body>
+</html>

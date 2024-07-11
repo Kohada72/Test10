@@ -1,23 +1,95 @@
-"""Detects text in the file."""
+"""----------------------------------------------------------------------
+File Name       : ImageRecognition.py
+Version         : V1.2
+Designer        : 平井伸之
+Date            : 2024.07.03
+Purpose         : レシート画像から文字データを抽出する
+----------------------------------------------------------------------"""
+"""
+Revision :
+V1.0 : 平井伸之, 2024.06.11  初期バージョン
+V1.01 : 平井伸之, 2024.06.18 jsonファイルのセーブ・ロード機能の追加
+V1.1 : 平井伸之, 2024.06.25  OCR結果のソート機能の追加
+V1.2 : 平井伸之, 2024.06.03  画像の前処理機能の追加
+
+"""
+
+"""
+Package                  Version
+------------------------ -----------
+blinker                  1.8.2
+cachetools               5.3.3
+certifi                  2024.6.2
+charset-normalizer       3.3.2
+click                    8.1.7
+colorama                 0.4.6
+fasttext-wheel           0.9.2
+Flask                    3.0.3
+gensim                   4.3.2
+google-api-core          2.19.0
+google-auth              2.30.0
+google-cloud-vision      3.7.2
+googleapis-common-protos 1.63.1
+grpcio                   1.64.1
+grpcio-status            1.62.2
+idna                     3.7
+itsdangerous             2.2.0
+Jinja2                   3.1.4
+joblib                   1.4.2
+MarkupSafe               2.1.5
+numpy                    1.26.4
+opencv-contrib-python    4.10.0.84
+pandas                   2.2.2
+pip                      24.1.2
+proto-plus               1.23.0
+protobuf                 4.25.3
+pyasn1                   0.6.0
+pyasn1_modules           0.4.0
+pybind11                 2.13.1
+python-dateutil          2.9.0.post0
+pytz                     2024.1
+requests                 2.32.3
+rsa                      4.9
+scikit-learn             1.5.0
+scipy                    1.12.0
+setuptools               70.0.0
+six                      1.16.0
+smart-open               7.0.4
+threadpoolctl            3.5.0
+tzdata                   2024.1
+urllib3                  2.2.1
+Werkzeug                 3.0.3
+wheel                    0.43.0
+wrapt                    1.16.0
+"""
 from google.cloud import vision
 import io
 client = vision.ImageAnnotatorClient()
+import cv2
+import numpy as np
+import json
+from google.cloud.vision import AnnotateImageResponse
 
 # [START vision_python_migration_text_detection]
-def imageRecognition(): 
-    lines = []
-    path = "C:\\Users\\nobu2\\Desktop\\todo-app\\img_1942_720.jpg"
+def imageRecognition(path): 
+    #画像の前処理
+    imageDataProcessing(path)
+    #OCR結果をソートした文字配列が格納される
+    sentence = []
+    #ファイル読み込み
     with io.open(path, 'rb') as image_file:
         content = image_file.read()
-
+    #google vison
     image = vision.Image(content=content)
-
     response = client.text_detection(image=image)
+    #結果をソート
     sentence = get_sorted_lines(response,threshold = 5)
+
     return sentence
     
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+単体テスト用
 "texts = response.text_annotations"
 print('Texts:')
 
@@ -36,20 +108,21 @@ if response.error.message:
             response.error.message))
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-import json
-from google.cloud.vision import AnnotateImageResponse
 
+#OCR結果をjsonファイルとして保存
 def save_as_json(response, filename):
     data = AnnotateImageResponse.to_json(response)
     with open(filename, mode='wt', encoding='utf-8') as file:
         json.dump(data, file, ensure_ascii=False, indent=2)
-        
+
+#OCR結果をjsonファイルをロード        
 def load_from_json(filename):
     with open(filename, mode='r', encoding='utf-8') as file:
         temp = json.load(file)
     response = AnnotateImageResponse.from_json(temp)
     return response
 
+#OCR結果を1行ずつソートする
 def get_sorted_lines(response,threshold = 5):
     """Boundingboxの左上の位置を参考に行ごとの文章にParseする
 
@@ -102,4 +175,78 @@ def get_sorted_lines(response,threshold = 5):
 
 
 
+def imageDataProcessing(path):
+    #画像読み込み
+    img = cv2.imread(path)
 
+    # グレイスケール化
+    gray, _ = cv2.decolor(img)
+    # 二値化
+    ret, th1 = cv2.threshold(gray, 0, 255, cv2.THRESH_OTSU)   
+    # 輪郭抽出
+    contours, hierarchy = cv2.findContours(th1, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_TC89_L1)
+    # 面積の大きいもののみ選別
+    areas = []
+    for cnt in contours:
+        area = cv2.contourArea(cnt)
+        if area > 50000:
+            ## 輪郭の近似
+            epsilon = 0.08*cv2.arcLength(cnt,True) #　＜＜＝＝※3
+            approx = cv2.approxPolyDP(cnt,epsilon,True)
+            areas.append(approx)
+    cv2.drawContours(img,areas,-1,(0,255,0),3)
+
+    # 重心を求める
+    cx=cy=0
+    for i in areas[0]:
+        cx += i[0][0]
+        cy += i[0][1]
+    cx /=len(areas[0])
+    cy /=len(areas[0])
+
+    # 切り取り画像サイズを求める
+    h=w=0
+    for i in areas[0]:
+        if i[0][0]>cx :
+            w +=i[0][0]
+        else:
+            w -=i[0][0]
+        #右側
+        if i[0][1]>cy:
+            #右下
+            h += i[0][1]
+        else:
+            #右上
+            h -= i[0][1]
+
+    # 点の順番を求める　tmp
+    tmp = []
+    for i in areas[0]:
+        if i[0][0]>cx :
+            #右側
+            if i[0][1]>cy:
+                #右下
+                tmp.append([w,h])
+            else:
+                #右上
+                tmp.append([w,0])
+        else:
+            #左側
+            if i[0][1]>cy:
+                #左下
+                tmp.append([0,h])
+            else:
+                #左上
+                tmp.append([0,0])
+     
+    # 射影変換
+    dst = []
+    pts1 = np.float32(areas[0])
+    pts2 = np.float32([tmp])
+
+    M = cv2.getPerspectiveTransform(pts1,pts2)
+    dst = cv2.warpPerspective(img,M,(w,h))
+    
+    cv2.imwrite(path,dst)
+
+  

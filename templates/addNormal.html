@@ -1,20 +1,36 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 {%extends 'base.html'%}
 
 {% block body %}
 <h1>テキストボックス追加</h1>
 <form id="textBoxForm" action="/addResult" method="post">
+
+    <!-- 画像解析から取得した食材 -->
+    {% for ingredient in ingredients%}
+    <div class="form-group">
+        <label>食材名: </label>
+        <input type="text" id="name" name="name" required minlength="1" maxlength="10" size="10" value = {{ingredient.name}} />
+            
+        <label>食材の量: </label>
+        <input type="number" id="quantity" name="quantity" required minlength="1" maxlength="4" size="10" value = {{ingredient.quantity}} />
+            
+         <label>食材の単位: </label>
+        <input type="text" id="unit" name="unit" required minlength="1" maxlength="4" size="10" value = {{ingredient.unit}} />
+    </div>
+    {% endfor %}
+
     <!-- 最初の入力フィールドセット -->
     <div class="form-group">
         <label>食材名: </label>
         <input type="text" id="name" name="name" required minlength="1" maxlength="10" size="10" />
         
         <label>食材の量: </label>
-        <input type="text" id="quantity" name="quantity" required minlength="1" maxlength="4" size="10" />
+        <input type="number" id="quantity" name="quantity" required minlength="1" maxlength="4" size="10" />
         
         <label>食材の単位: </label>
         <input type="text" id="unit" name="unit" required minlength="1" maxlength="4" size="10" />
     </div>
+
     <!-- ボタンのコンテナ -->
     <div class="button-container">
         <input type="submit" class="submit-button" value="再読取り">
@@ -22,6 +38,7 @@
         <input type="submit" class="submit-button" value="完了">
     </div>
 </form>
+
 <script>
     function addTextBoxes() {
         const form = document.getElementById("textBoxForm");

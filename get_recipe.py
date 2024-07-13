@@ -1,4 +1,4 @@
-"""----------------------------------------------------------------------
+﻿"""----------------------------------------------------------------------
 File Name       : get_recipe.py
 Version         : V1.2
 Designer        : 上之山将太, 和田一真
@@ -24,7 +24,7 @@ from pymongo.errors import DuplicateKeyError
 from fuzzywuzzy import fuzz
 
 #データベースアクセス
-uri = "mongodb+srv://al22047:ht4zD2gmM8rm9nkL@cluster0.16pm7pd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"  #環境依存
+uri = "mongodb+srv://web_server:h5vaahiG7WmtrgEN@cluster0.16pm7pd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"  #環境依存
 client = MongoClient(uri)
 dbname = client['user_management_list']
 collection = dbname['recipes_collection']

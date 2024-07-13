@@ -1,4 +1,4 @@
-'''-------------------------------------------------------------------- 
+﻿'''-------------------------------------------------------------------- 
 Function Name       : foodManagementUI
 Designer            : 上之山 将太
 Date                : 2024.05.27
@@ -7,13 +7,14 @@ Argument            : なし
 Return              : render_template('index.html', ingredients = ingredients, user_name = user_name)
 ----------------------------------------------------------------------'''
 
-from flask import Flask, render_template
+from flask import session, render_template
 from get_ingredients_list import getIngredientsList
 
 
 
 def foodManagementUI():
-    ingredients= getIngredientsList()
+    id = session["user_id"]
+    ingredients= getIngredientsList(id)
     
     return render_template('index.html', ingredients = ingredients)
 

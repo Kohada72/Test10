@@ -63,9 +63,13 @@ def signup():
         user_passward = request.form.get("user_passward")
         
         return signupUI.signupUI2(user_id,user_name,user_passward)    
+
 #M3食事管理管理画面の遷移処理
 @app.route('/', methods = ('GET', 'POST'))
 def foodManagement():
+    
+    if "is_login" not in session:
+        session['is_login'] = False
     
     #ログイン検証
     if session["is_login"] != True:

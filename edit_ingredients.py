@@ -80,7 +80,7 @@ def editIngredient(id, ingredients, is_delete):
 
         #print(new_ingredients)
 
-        dbAddIngredient(id, ingredients)
+        dbAddIngredient(id, new_ingredients)
     else:  # 削除なら
         dbDeleteIngredient(id, ingredients)
 #テストデータ

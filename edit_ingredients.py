@@ -62,7 +62,7 @@ def editIngredient(id, ingredients, is_delete):
         threshold = 0.7  # 近似度の閾値（0から1の間） カンの数値
 
         for ingredient in ingredients:
-            name = to_romaji(ingredient['ingredient'])
+            name = to_romaji(ingredient['name'])
             #matched = False
             for key in csv_data:
                 similarity = Levenshtein.ratio(key, name)

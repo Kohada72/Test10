@@ -67,9 +67,6 @@ def signup():
 @app.route('/', methods = ('GET', 'POST'))
 def foodManagement():
     
-    if "is_login" not in session:
-        session['is_login'] = False
-    
     #ログイン検証
     if session["is_login"] != True:
         flash("ログインしてください。")
@@ -205,4 +202,4 @@ def recipeDetail(uri):
 
 #Flask実行
 if __name__ == '__main__':
-    app.run(port = 80, host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', port=80, debug=True)

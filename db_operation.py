@@ -20,7 +20,8 @@ Argument            : なし
 Return              : db
 ----------------------------------------------------------------------'''
 def getDb():
-    uri = "mongodb+srv://al22005:pOSrTuopGEEhSU6E@cluster0.16pm7pd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    #データベースのユーザネームとパスワードを使用している
+    uri = "mongodb+srv://web_server:h5vaahiG7WmtrgEN@cluster0.16pm7pd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
     # Create a connection using MongoClient. You can import MongoClient or use pymongo.MongoClient
     client = MongoClient(uri)
     #user_management_listというデータベースを返している

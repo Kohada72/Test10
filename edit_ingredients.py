@@ -54,7 +54,7 @@ def editIngredient(id, ingredients, is_delete):
         filename = 'update_ingredient.csv'
 
         # encoding='shift-JIS'かも
-        with open(filename, encoding='shift-JIS', newline='') as f:
+        with open(filename, encoding='utf-8', newline='') as f:
             csvreader = csv.reader(f)
             next(csvreader)  # 最初の行をスキップ
             csv_data = {to_romaji(row[0]): int(row[1]) for row in csvreader}

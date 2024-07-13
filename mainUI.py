@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, redirect, session, flash
+﻿from flask import Flask, render_template, request, redirect, session, flash
 from UI_package import recipeListUI, addFoodUI, addResultUI, deleteIngredientsUI, edit_modeUI, foodManagementUI, \
-    imageRecognitionUI, loginUI, normalWayUI, recipeDetailUI, recoResultUI, recipeSearchUI
+    imageRecognitionUI, loginUI, normalWayUI, recipeDetailUI, recoResultUI, recipeSearchUI,signupUI
 
 '''-------------------------------------------------------------------- 
 Function Name       : MainUI
@@ -18,14 +18,15 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 #セッションのデータを暗号化
 app.secret_key = '1B10'
 
-user_id = ""
-user_name = ""
-
 #ページのルート設定
  
 #M2ログイン画面の遷移処理
 @app.route('/login', methods = ('GET', 'POST'))
 def login():
+    
+    if "is_login" not in session:
+        session['is_login'] = False
+    
     if(request.method == 'GET'): #最初の遷移
         session["is_login"] = False
         return render_template('login.html')
@@ -49,13 +50,25 @@ def login():
         else: 
             flash('ユーザーIDとパスワードのどちらか、または両方が誤っています。')
             return redirect("/login") #もう一度ログイン画面へ
-            
+
+#M2.1 サインアップ画面への遷移処理
+@app.route('/signup', methods = ("GET", "POST"))
+def signup():
+    
+    if(request.method == "GET"):
+        return signupUI.signupUI1()
+    else:
+        user_id = request.form.get("user_id")
+        user_name = request.form.get("user_name")
+        user_passward = request.form.get("user_passward")
+        
+        return signupUI.signupUI2(user_id,user_name,user_passward)    
 #M3食事管理管理画面の遷移処理
 @app.route('/', methods = ('GET', 'POST'))
 def foodManagement():
     
     #ログイン検証
-    if session["is_login"] == False:
+    if session["is_login"] != True:
         flash("ログインしてください。")
         return redirect("/login")
     
@@ -68,7 +81,7 @@ def foodManagement():
 def edit_mode():
     
     #ログイン検証
-    if session["is_login"] == False:
+    if session["is_login"] != True:
         flash("ログインしてください。")
         return redirect("/login")
     
@@ -81,7 +94,7 @@ def edit_mode():
 def add():
     
     #ログイン検証
-    if session["is_login"] == False:
+    if session["is_login"] != True:
         flash("ログインしてください。")
         return redirect("/login")
     
@@ -93,7 +106,7 @@ def add():
 def delete():
     if (request.method == 'POST'):
         #ログイン検証
-        if session["is_login"] == False:
+        if session["is_login"] != True:
             flash("ログインしてください。")
             return redirect("/login")
     
@@ -105,7 +118,7 @@ def delete():
 @app.route('/imageReco')
 def imageReco():
     #ログイン検証
-    if session["is_login"] == False:
+    if session["is_login"] != True:
         flash("ログインしてください。")
         return redirect("/login")
     
@@ -116,7 +129,7 @@ def imageReco():
 @app.route('/upload', methods = ('GET', 'POST'))
 def upload():
     #ログイン検証
-    if session["is_login"] == False:
+    if session["is_login"] != True:
         flash("ログインしてください。")
         return redirect("/login")
     
@@ -127,7 +140,7 @@ def upload():
 @app.route('/add/normal/')
 def addNormal():
     #ログイン検証
-    if session["is_login"] == False:
+    if session["is_login"] != True:
         flash("ログインしてください。")
         return redirect("/login")
     
@@ -139,7 +152,7 @@ def addNormal():
 @app.route('/addResult', methods = ('GET', 'POST'))
 def addResult():
     #ログイン検証
-    if session["is_login"] == False:
+    if session["is_login"] != True:
         flash("ログアウトしてください。")
         return redirect("/login")
     
@@ -158,7 +171,7 @@ def recipeList():
     
     if(request.method == 'POST'):
         #ログイン検証
-        if session["is_login"] == False:
+        if session["is_login"] != True:
             flash("ログインしてください。")
             return redirect("/login")
     
@@ -177,7 +190,7 @@ def recipeList():
 @app.route('/recipeDetail/<uri>', methods = ('GET','POST'))
 def recipeDetail(uri):
     #ログイン検証
-    if session["is_login"] == False:
+    if session["is_login"] != True:
         flash("ログインしてください。")
         return redirect("/login")
     

@@ -9,7 +9,6 @@ Purpose       	: データベースの食材情報とユーザ情報の編集
 '''
 Revision : 
 V1.0 : 上之山 将太, 2024.06.11
-V1.1 : 上之山将太, 2024.07.02 dbDeleteIngredient
 修正をした場合は以下の通りに記述をお願いします
 (例)
 V1.1 : 上之山将太, 2024.07.02 dbDeleteIngredient

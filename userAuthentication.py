@@ -1,4 +1,4 @@
-from searchPass import searchPass
+﻿from searchPass import searchPass
 
 def userAuthentication(userID, passward):
     passResult = False

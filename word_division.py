@@ -1,6 +1,6 @@
 ﻿"""----------------------------------------------------------------------
 File Name       : word_division.py
-Version         : V1.1
+Version         : V1.3
 Designer        : 和田一真
 Date            : 2024.06.09
 Purpose         : レシート画像の解析データから食材名の抽出をする。
@@ -10,6 +10,7 @@ Revision :
 V1.0 : 和田一真  2024.06.09  初期バージョン
 V1.1 : 和田一真  2024.06.18  制御用関数(wordDivision)追加
 V1.2 : 和田一真  2024.07.13  非ASCII環境対応
+V1.3 : 和田一真  2024.07.13  高効率モデル(ja_100)にも対応
 """
 """
 Package Requirement
@@ -45,7 +46,7 @@ modifiers = [
 ]
 
 #初期化
-model_path = "./models/cc.ja.300.bin"
+model_path = "./models/ja_100.bin"  #cc.ja.300 or ja_100
 model = fasttext.load_model(model_path)  #モデルのロード
 ingredient_vectors = {ingredient: model.get_word_vector(ingredient) for ingredient in ingredients_list}  #ベクトルの事前計算
 
@@ -59,7 +60,7 @@ def cosineSimilarity(vec1, vec2):
     return dot_product / (norm_vec1 * norm_vec2)
 
 #食材判定関数
-def isIngredient(word, threshold=0.45):
+def isIngredient(word, threshold=0.7):  #cc.ja.300なら0.45, ja_100なら0.7
     for j in range(1, len(word) + 1):
         res = [word[i:i+j] for i in range(0, len(word) + 1 - j)]
         for text in res:

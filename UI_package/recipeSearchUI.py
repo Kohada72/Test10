@@ -1,5 +1,5 @@
-#import recipeSearchModule
-from flask import Flask, render_template
+﻿#import recipeSearchModule
+from flask import session, render_template
 from get_ingredients_list import getIngredientsList
 '''-------------------------------------------------------------------- 
 Function Name       : recipeListUI
@@ -12,5 +12,7 @@ Return              : render_template('recipe_list.html', rcl = recipe_lsit)
 
 #レシピ検索画面
 def recipeSearchUI():
-        
-    return render_template("recipeSearch.html", ingredients = getIngredientsList())
+    
+    id = session["user_id"]
+    
+    return render_template("recipeSearch.html", ingredients = getIngredientsList(id))

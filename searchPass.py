@@ -1,4 +1,4 @@
-'''----------------------------------------------------------------- 
+﻿'''----------------------------------------------------------------- 
 File Name		: searchPass.py
 Version		: V1.0 
 Designer		: 上之山 将太
@@ -23,6 +23,3 @@ def searchPass(id):
         return user_info["password"]
     else:
         return ""
-    
-#print(validateUserInfo(22))
-#print(type(validateUserInfo(22)))

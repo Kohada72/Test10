@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+﻿from flask import session, render_template
 from get_ingredients_list import getIngredientsList
 
 '''-------------------------------------------------------------------- 
@@ -11,6 +11,7 @@ Return              : render_template('edit.html', ingredients = ingredients, us
 ----------------------------------------------------------------------'''
 
 def edit_modeUI():
-    ingredients= getIngredientsList()
+    id = session["user_id"]
+    ingredients= getIngredientsList(id)
 
     return render_template('edit.html', ingredients = ingredients)

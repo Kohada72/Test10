@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session, flash
+﻿from flask import Flask, render_template, request, redirect, session, flash
 from UI_package import recipeListUI, addFoodUI, addResultUI, deleteIngredientsUI, edit_modeUI, foodManagementUI, \
     imageRecognitionUI, loginUI, normalWayUI, recipeDetailUI, recoResultUI, recipeSearchUI
 

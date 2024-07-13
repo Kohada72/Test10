@@ -1,4 +1,4 @@
-﻿<html lang="en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +7,11 @@
 </head>
 
 <body>
+
     <div class="login-body">
+
         <div class = "login-container">
-            <h2>ログイン</h2>
+            <h2>サインアップ</h2>
 
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
@@ -20,32 +22,28 @@
                     </ul>
                 {% endif %}
            {% endwith %}
-           
-            <form action = "/login" method = "POST">
-                
-
+            <form action ="/signup" method = "POST">
+            
                 <div class = "login-group">
                     <label for = "userID">ユーザID</label>
-                    <input type = "text" name = "userID" id="userID"> 
+                    <input type = "text" name = "user_id" id="user_id"> 
                 </div>
-                
+
+                <div class = "login-group">
+                    <label for = "userName">ユーザ名</label>
+                    <input type = "text" name = "user_name" id = "user_name">
+                </div>
+
                 <div class = "login-group">
                     <label for = "passward">パスワード</label>
-                    <input type = "text" name = "passward" > 
+                    <input type = "text" name = "user_passward" > 
                 </div>
 
-                <br>
-                    
-                <button type = "submit">ログイン</button>
+                <br><br>
 
+                <button type = "submit">登録</button>
             </form>
-
-            <div class = "signup">
-                <form action = "/signup" method = "GET">
-                    <button type = "submit">サインアップ</input>
-                </form>
-            </div>
-            
+        </div>
     </div>
 </body>
 </html>

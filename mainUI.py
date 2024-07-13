@@ -66,7 +66,8 @@ def signup():
 #M3食事管理管理画面の遷移処理
 @app.route('/', methods = ('GET', 'POST'))
 def foodManagement():
-    
+    if "is_login" not in session:
+        session["is_login"] = False
     #ログイン検証
     if session["is_login"] != True:
         flash("ログインしてください。")
@@ -202,4 +203,4 @@ def recipeDetail(uri):
 
 #Flask実行
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=80, debug=True)

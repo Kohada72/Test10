@@ -35,18 +35,9 @@ def getRecipeId(ingredient_name):
     all_recipes = collection.find()
     for recipe in all_recipes:
         ingredients = recipe.get("ingredients", [])
-        find = False
         for ingredient in ingredients:
-            tmp_ing = ingredient["ingredient_ro"]
-            dif = abs(len(tmp_ing) - len(ingredient_name))
-            for i in range(dif + 1):
-                sli_ing = tmp_ing[i : (i + len(ingredient_name)) if len(ingredient_name) < len(tmp_ing) else len(tmp_ing)]
-                sim_score = fuzz.ratio(sli_ing, ingredient_name)
-                if sim_score >= 70:
-                    recipe_id_list.append(recipe.get("_id"))
-                    find = True
-            if find:
-                break
+            ingredient_name = ingredient["ingredient_ro"]
+            recipe_id_list.append(recipe.get("_id"))
 
     return recipe_id_list
 

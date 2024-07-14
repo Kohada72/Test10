@@ -1,6 +1,6 @@
 ﻿"""----------------------------------------------------------------------
 File Name       : word_division.py
-Version         : V1.3
+Version         : V1.4
 Designer        : 和田一真
 Date            : 2024.06.09
 Purpose         : レシート画像の解析データから食材名の抽出をする。
@@ -11,6 +11,7 @@ V1.0 : 和田一真  2024.06.09  初期バージョン
 V1.1 : 和田一真  2024.06.18  制御用関数(wordDivision)追加
 V1.2 : 和田一真  2024.07.13  非ASCII環境対応
 V1.3 : 和田一真  2024.07.13  高効率モデル(ja_100)にも対応
+V1.4 : 和田一真  2024.07.14  wordDivisionの戻り値をdictへ変更
 """
 """
 Package Requirement
@@ -92,5 +93,11 @@ def wordDivision(data_array):
         if(len(text) == 0):
             continue
         if(isIngredient(text)):
-            divided_list.append(text)
+            ingredient = {
+                "name": text,
+                "quantity": 0,
+                "unit": "g"
+            }
+            divided_list.append(ingredient)
+
     return divided_list

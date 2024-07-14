@@ -1,4 +1,4 @@
-from flask import  render_template,redirect,flash
+﻿from flask import  render_template,redirect,flash
 from db_operation import addUser
 '''-------------------------------------------------------------------- 
 Function Name       : signupUI

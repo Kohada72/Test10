@@ -17,13 +17,9 @@ Function            : 引数のidに該当するユーザのパスワードを�
 Argument            : id
 Return              : user_info["password"] (str)
 ----------------------------------------------------------------------'''
-
 def searchPass(id):
     user_info = getUser(id)
     if user_info and "password" in user_info:
         return user_info["password"]
     else:
         return ""
-    
-#print(validateUserInfo(22))
-#print(type(validateUserInfo(22)))

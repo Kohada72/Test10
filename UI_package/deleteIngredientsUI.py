@@ -1,6 +1,7 @@
-from flask import Flask, redirect, request, session
+﻿from flask import Flask, redirect, request, session
 from edit_ingredients import editIngredient
 from get_ingredients_list import getIngredientsList
+import json
 
 '''-------------------------------------------------------------------- 
 Function Name       : deleteIngredients
@@ -12,14 +13,19 @@ Return              : render_template('index.html', ingredients = ingredients, u
 ----------------------------------------------------------------------'''
 
 def deleteIngredientsUI():
-    ingredients_to_delete = request.form.getlist('ingredients')
+    ingredients_to_delete_str = request.form.getlist('ingredients')
     is_delete = True
     id = session["user_id"]
-    editIngredient(id, ingredients_to_delete, is_delete)
     
-    #削除後の食材管理リストを表示
-    #ingredients = getIngredientsList()
-    #user_name = getUserName(1)
+    
+    #データを辞書型に再度変換
+    ingredients_to_delete = []
+    for i in ingredients_to_delete_str:
+        i = i.replace("\'", "\"")
+        ingredient = json.loads(i)
+        ingredients_to_delete.append(ingredient)
+        
+    editIngredient(id, ingredients_to_delete, is_delete)
     
     #expiry_date = datetime.date.today + 10 # "+10" は賞味期限を考慮したため正しい値はあとで
     return redirect('/')

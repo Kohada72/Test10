@@ -23,6 +23,7 @@ V1.2 : 上之山 将太, 2024.07.09 editIngredient
 from db_edit_ingredients import dbAddIngredient, dbDeleteIngredient
 import csv
 from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
 import pykakasi
 import Levenshtein
 #import unittest
@@ -54,7 +55,7 @@ def editIngredient(id, ingredients, is_delete):
         filename = 'update_ingredient.csv'
 
         # encoding='shift-JIS'かも
-        with open(filename, encoding='shift-JIS', newline='') as f:
+        with open(filename, encoding='utf-8', newline='') as f:
             csvreader = csv.reader(f)
             next(csvreader)  # 最初の行をスキップ
             csv_data = {to_romaji(row[0]): int(row[1]) for row in csvreader}
@@ -62,43 +63,45 @@ def editIngredient(id, ingredients, is_delete):
         threshold = 0.7  # 近似度の閾値（0から1の間） カンの数値
 
         for ingredient in ingredients:
-            name = to_romaji(ingredient['ingredient'])
-            #matched = False
+            name = to_romaji(ingredient['name'])
             for key in csv_data:
                 similarity = Levenshtein.ratio(key, name)
                 if similarity >= threshold:  # 近似度をチェック
-                    # expiry_dateから'/'を削除して日付オブジェクトに変換
-                    expiry_date_str = ingredient['expiry_date'].replace('/', '')
-                    expiry_date = datetime.strptime(expiry_date_str, '%Y%m%d')
+                    # 現在の日付を取得
+                    current_date = datetime.now()
+                    # CSVファイルのデータを日、月、年に変換
+                    days_to_add = csv_data[key]
+                    years = days_to_add // 365
+                    months = (days_to_add % 365) // 30
+                    days = (days_to_add % 365) % 30
                     # 賞味期限を加算
-                    new_expiry_date = expiry_date + timedelta(days=csv_data[key])
+                    new_expiry_date = current_date + relativedelta(years=years, months=months, days=days)
                     # 新しいexpiry_dateを元の形式に変換して更新
                     ingredient['expiry_date'] = new_expiry_date.strftime('%Y/%m/%d')
-                    # matched = True
                     break  # 最初に一致したものを使用
             new_ingredients.append(ingredient)
 
-        #print(new_ingredients)
+        # print(new_ingredients)
 
         dbAddIngredient(id, new_ingredients)
     else:  # 削除なら
         dbDeleteIngredient(id, ingredients)
 #テストデータ
-# ingredients = [
-#             {
-#                 #本来は"name" : "food_name",
-#                 "ingredient": "豆乳",
-#                 "quantity": 5,
-#                 "unit":"個",
-#                 "expiry_date" : "2024/07/09"
-#             },
-#             {
-#                 "ingredient": "豚肉",
-#                 "quantity": 100,
-#                 "unit":"g",
-#                 "expiry_date" : "2024/07/09"
-#             }
-#         ]
+# # ingredients = [
+# #             {
+# #                 #本来は"name" : "food_name",
+# #                 "name": "砂糖",
+# #                 "quantity": 5,
+# #                 "unit":"個",
+# #                 "expiry_date" : "2024/07/09"
+# #             },
+# #             {
+# #                 "name": "豚肉",
+# #                 "quantity": 100,
+# #                 "unit":"g",
+# #                 "expiry_date" : "2024/07/09"
+# #             }
+# #         ]
 # editIngredient("2", ingredients, False)
 
 #mockでテスト

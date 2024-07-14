@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+﻿from flask import Flask, render_template
 '''-------------------------------------------------------------------- 
 Function Name       : addFoodUI
 Designer            : 上之山 将太

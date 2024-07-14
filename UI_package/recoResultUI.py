@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect,app
+﻿from flask import Flask, render_template, request, redirect,app
 import os
 
 '''-------------------------------------------------------------------- 
@@ -12,17 +12,25 @@ Return              : render_template('result.html', food_name = name, quantity 
 #画像をデータベースにアップロードする関数が分からないのでいったん自分のPCに保存する
 
 def recoResultUI():
+    #ファイル無しはもう一度
     if 'image' not in request.files:
-        return redirect(request.url)
+        return redirect("/imageReco")
+    
+    
     file = request.files['image']
-    
+    #ファイル名が空白の場合もう一度
     if file.filename == '':
-        return redirect(request.url)
-    
+        return redirect("/imageReco")
+    #正常なアップロードの場合、画像解析に渡す
     if file:
         filepath = os.path.join("uploads", file.filename)
         file.save(filepath)
-
-        return render_template('result.html')
-    
-    
+        #食材のデータを画像解析からもらう関数
+        
+        #テスト群
+        ingredient_list = []
+        ingredient = {"name":"はちみつ", "quantity":10, "unit":"g" }
+        ingredient_list.append(ingredient)
+        #####
+        
+        return render_template("addNormal.html", ingredients = ingredient_list )    

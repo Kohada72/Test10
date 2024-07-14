@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+﻿from flask import Flask, render_template, request, session
 from edit_ingredients import editIngredient
 '''-------------------------------------------------------------------- 
 Function Name       : normalResult

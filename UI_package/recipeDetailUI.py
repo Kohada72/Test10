@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+﻿from flask import Flask, render_template
 from collect_recipe_data import getRecipeFromUri, RECIPE
 
 '''-------------------------------------------------------------------- 

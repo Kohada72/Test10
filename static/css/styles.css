@@ -1,4 +1,4 @@
-/* 全体のボディスタイル */
+﻿/* 全体のボディスタイル */
 html{
     height: 100%;
     width: 100%;
@@ -83,18 +83,24 @@ button:hover{
     padding: 20px;
     border-radius: 8px;
     width: 400px;
+    height: 400px;
     text-align: center;
+    position: relative;
 }
 
 .login-group {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 20px;
     display: flex;
     align-items: center;
+
 }
 
 .login-group label{
-    text-align: right;
+    text-align: left;
     width: 100px;
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
 .login-group input{
@@ -111,6 +117,15 @@ button:hover{
     color: white;
     font-size: 10px;
     width: 50%;
+}
+
+.signup button{
+    background-color:aqua;
+    position: absolute;
+    right: 10px;
+    bottom:10px;
+    padding-top:10px;
+    width: 25%;
 }
 /* *****ログイン画面のスタイル***** */
 

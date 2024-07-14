@@ -1,4 +1,4 @@
-{%extends 'base.html'%}
+﻿{%extends 'base.html'%}
 
 {% block head %}
     <title>レシピ一覧画面</title>
@@ -10,7 +10,7 @@
     {% for i in rcl %}
     <li>
         <a href = "{{ url_for('recipeDetail',uri = i.recipe_uri) }}">
-            <img src = "{{url_for('static', filename = '/images/'+ i.recipe_uri + '.jpg')}}" alt="画像"> 
+            <img src = "{{url_for('static', filename = '/images/'+ i.recipe_uri + '.jpeg')}}" alt="画像"> 
         </a>
         <p>{{i.recipe_name}}</p>
     </li>

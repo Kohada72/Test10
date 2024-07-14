@@ -83,31 +83,31 @@ def editIngredient(id, ingredients, is_delete):
                     break  # 最初に一致したものを使用
             if ingredient['expiry_date'] == current_date.strftime('%Y/%m/%d'):
                 ingredient['expiry_date'] = '賞味期限なし'
-                
+
             new_ingredients.append(ingredient)
 
-        print(new_ingredients)
+        # print(new_ingredients)
 
-        # dbAddIngredient(id, new_ingredients)
+        dbAddIngredient(id, new_ingredients)
     else:  # 削除なら
         dbDeleteIngredient(id, ingredients)
 #テストデータ
-ingredients = [
-            {
-                #本来は"name" : "food_name",
-                "name": "ウンチ",
-                "quantity": 5,
-                "unit":"個",
-                "expiry_date" : "2024/07/09"
-            },
-            {
-                "name": "トマト",
-                "quantity": 1,
-                "unit":"pc",
-                "expiry_date" : "2024/06/12"
-            }
-        ]
-editIngredient("2", ingredients, False)
+# ingredients = [
+#             {
+#                 #本来は"name" : "food_name",
+#                 "name": "ウンチ",
+#                 "quantity": 5,
+#                 "unit":"個",
+#                 "expiry_date" : "2024/07/09"
+#             },
+#             {
+#                 "name": "トマト",
+#                 "quantity": 1,
+#                 "unit":"pc",
+#                 "expiry_date" : "2024/06/12"
+#             }
+#         ]
+# editIngredient("2", ingredients, False)
 
 #mockでテスト
 '''

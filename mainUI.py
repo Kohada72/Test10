@@ -42,8 +42,8 @@ def login():
         
         #ログイン検証
         #login成功
-        if( loginUI.loginUI(user_id,passward) ):
-            session["user_id"] = user_id #セッションにユーザIDを登録
+        if( loginUI.loginUI(int(user_id),passward) ):
+            session["user_id"] = int(user_id) #セッションにユーザIDを登録
             session["is_login"] = True
             return redirect("/") #ログイン成功なら遷移
         #login失敗

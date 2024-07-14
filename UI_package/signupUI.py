@@ -13,6 +13,12 @@ def signupUI1():
     return render_template('signup.html')
 
 def signupUI2(user_id, user_name, user_passward):
+    try:
+        user_id = int(user_id)
+    except ValueError:
+        flash("ユーザIDの欄には数値を入力して下さい")
+        return redirect("/signup")
+    
     addUser(user_id, user_name, user_passward)
     flash("ユーザ登録が完了しました")
     return redirect("/login")

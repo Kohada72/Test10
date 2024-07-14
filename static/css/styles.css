@@ -6,9 +6,16 @@ html{
 
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
     height: 100%;
     width: 100%;
+
+    background-image: url("../UI_img/main_back_img.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: rgba(255,255,255,0.4);
+    background-blend-mode: lighten;
+    background-attachment: fixed;
+    
 }
 
 /* *****共通の構造スタイル(ログイン画面を除く)***** */
@@ -17,14 +24,36 @@ body {
     display: flex;
     width: 100%;
     height: 100%;
+    gap: 2vw;
 }
 
 /*サイドバー*/
-.sidebar {
-    width: 25%;
-    height: 100%;
+.sidebar{
+    width: 40%;
+    height: 45%;
+    max-width: 350px;
+    max-height: 450px;
+
+    border: 3px solid;
+    
+    margin-right: 5px;
+    margin-top: 5%;
+
+    background-color:rgb(184, 184, 184);
+}
+
+.sidebar p{
+    text-align: center;
+    font-size: 20px;
+    font-family: "Arial", 'メイリオ';
+    
+    font-weight: bold;
     border: 1px solid;
-    margin-right: 50px;
+
+    margin-left: 20%;
+    margin-right: 20%;
+
+    background-color: #d0d0cf;
 }
 
 .sidebar ul{
@@ -39,15 +68,34 @@ body {
 
 .sidebar button{
     width: 100%;
-    height: 60px;
+    height: 15%;
     background-color: rgb(175, 230, 230);
 }
+
+.search_img{
+    width: 20%;
+    float: left;
+}
+.search_button{
+    display:flex;
+    align-items: center;
+}
+
+.index_button{
+    display:flex;
+    align-items: center;
+}
+.list_img{
+    width: 20%;
+    float: left;
+}
+
 
 /*メインエリア*/
 .main {
     width: 100%;
     height: 100%;
-    margin: 0 10px;
+    
 
     position: relative;
 }
@@ -62,6 +110,7 @@ button:hover{
 .flush{
     color:red;
     text-decoration: underline;
+    float: left;
 }
 
 
@@ -73,7 +122,7 @@ button:hover{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     margin: 0;
     background-color: #525151;
 }
@@ -82,8 +131,11 @@ button:hover{
     background: #fff;
     padding: 20px;
     border-radius: 8px;
-    width: 400px;
-    height: 400px;
+    
+    width: 100%;
+    max-width: 500px;
+    height: 50%;
+
     text-align: center;
     position: relative;
 }
@@ -134,17 +186,52 @@ button:hover{
 .edit_button button{
     position: absolute;
     position: fixed;
-    right: 20px;
-    bottom: 20px;
+    left: 3%;
+    bottom: 3%;
     
+    border: 2px solid;
     border-radius: 50%;
-    width: 100px;
-    height: 100px
+    width: 25vw;
+    height: 25vw;
+    max-width: 150px;
+    max-height: 150px;
+
+    background-color: rgb(176, 231, 127);
+}
+.edit_button button:hover{
+    background-color: rgb(143, 188, 104);
 }
 
 .ingredient_list{
-    margin-left: 100px;
+    text-align: left;
     border: 1px solid;
+    padding-bottom: 10%;
+    margin-right: 5%;
+
+    background-color: #fefee5;
+}
+
+.ingredient_list p{
+    padding-left: 5%;
+}
+
+.index_title{
+    text-align: center;
+    text-decoration: underline;
+
+    background-color: rgb(240, 239, 239);
+
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.ref_img{
+    margin-left:2%;
+    margin-top:2px;
+
+    width: 8%;
+    max-width: 40px;
+    
 }
 
 /* *****食材管理画面のスタイル***** */
@@ -153,30 +240,59 @@ button:hover{
 
 .add_button button{
     position: absolute;
-    left: 0;
-    bottom: 100px;
+    position: fixed;
+    left: 5;
+    bottom: 32vh;
 
+    border: 2px solid;
     border-radius: 50%;
-    width: 75px;
-    height: 75px;
+    width: 20vw;
+    height: 20vw;
+    max-width:100px;
+    max-height:100px;
+
+    background-color: rgb(220, 118, 118)
 }
+.add_button button:hover{
+    background-color: rgb(188, 105, 105);
+}
+
 .delete_button button{
     position: absolute;
-    left: 0;
-    bottom: 0;
+    position: fixed;
+    left: 5;
+    bottom: 20vh;
 
+    border: 2px solid;
     border-radius: 50%;
-    width: 75px;
-    height: 75px;
+    width: 20vw;
+    height: 20vw;
+    max-width:100px;
+    max-height:100px;
+
+    background-color: rgb(112, 112, 245)
 }
+.delete_button button:hover{
+    background-color: rgb(93, 93, 204);
+}
+
 .done_button button{
     position: absolute;
-    right: 0px;
-    bottom: 0px;
+    position: fixed;
+    left: 5px;
+    bottom: 5px;
 
+    border: 2px solid;
     border-radius:50%;
-    width: 75px;
-    height: 75px;
+    width: 20vw;
+    height: 20vw;
+    max-width:100px;
+    max-height:100px;
+
+    background-color: rgba(176, 231, 127, 0.8)
+}
+.done_button button:hover{
+    background-color: rgba(142, 188, 102, 0.8)
 }
 
 /* *****編集モードのスタイル***** */

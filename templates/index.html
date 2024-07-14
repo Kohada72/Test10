@@ -1,8 +1,9 @@
 ﻿{% extends 'base.html' %}
 {% block body %}
 
-    <h1>食材管理画面</h1>
+    <h1 class = "index_title" >食材管理画面</h1>
     <br>
+    ▼食材一覧
 
     <div class = "edit_button">
         <form method="GET" action="/edit">
@@ -11,8 +12,9 @@
     <div>
     
     <div class = "ingredient_list">
+        <img src = "{{url_for('static', filename = '/UI_img/'+ "ref_img.png")}}" class = "ref_img">
         {% for ingredient in ingredients %}
-            <h2>・{{ ingredient.name }} - {{ ingredient.quantity }}{{ ingredient.unit }} - {{ ingredient.expiry_date }}</h2>
+            <p>・{{ ingredient.name }} <br> {{ ingredient.quantity }}{{ ingredient.unit }} - {{ ingredient.expiry_date }} </p>
         {% endfor %}
     </div>
 

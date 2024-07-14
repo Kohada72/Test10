@@ -6,9 +6,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='/css/styles.css') }}">
 </head>
 
-<body>
-
-    <div class="login-body">
+<body class="login-body">
 
         <div class = "login-container">
             <h2>サインアップ</h2>
@@ -21,7 +19,9 @@
                     {% endfor %}
                     </ul>
                 {% endif %}
+                <br><br>
            {% endwith %}
+           
             <form action ="/signup" method = "POST">
             
                 <div class = "login-group">
@@ -44,6 +44,5 @@
                 <button type = "submit">登録</button>
             </form>
         </div>
-    </div>
 </body>
 </html>

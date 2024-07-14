@@ -19,6 +19,9 @@ def signupUI2(user_id, user_name, user_passward):
         flash("ユーザIDの欄には数値を入力して下さい")
         return redirect("/signup")
     
-    addUser(user_id, user_name, user_passward)
-    flash("ユーザ登録が完了しました")
-    return redirect("/login")
+    if(addUser(user_id, user_name, user_passward)):
+        flash("ユーザ登録が完了しました")
+        return redirect("/login")
+    else:
+        flash("既存のユーザIDです。")
+        return redirect("/signup")

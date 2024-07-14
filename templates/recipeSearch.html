@@ -12,7 +12,8 @@
             {% for ingredient in ingredients %}
             <li>
                 <input type="checkbox" name="ingredients" value="{{ ingredient.name }}">
-                <label> {{ ingredient.name }} - {{ ingredient.quantity }}{{ ingredient.unit }} - {{ingredient.expiry_date }}</label>
+                <label> {{ ingredient.name }} <br> {{ ingredient.quantity }}{{ ingredient.unit }} - {{ingredient.expiry_date }}</label>
+                <br><br>
             </li>
             {% endfor %}
         </ul>

@@ -73,7 +73,7 @@ Designer            : 上之山 将太
 Date                : 2024.06.21
 Function            : ユーザを追加する
 Argument            : id, user_name, password
-Return              : なし
+Return              : bool
 ----------------------------------------------------------------------'''
 def addUser(id, user_name, password):
     #本来は引数として受け取る--------
@@ -93,9 +93,9 @@ def addUser(id, user_name, password):
 
     try:
         collection.insert_one(user_with_ingredients)
-        print("User inserted successfully")
+        return True
     except DuplicateKeyError:
-        print(f"User with _id {user_with_ingredients['_id']} already exists in the collection")
+       return False
     
 
 

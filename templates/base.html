@@ -9,21 +9,38 @@
 </head>
 <body>
     <div class = "content">
-            
+
         <aside class = "sidebar">
+            
+            <p>menu</p>
+            <br>
+            
             <ul>
-                <form action = "/", method = "GET">
-                    <li> <button type = "submit">食材管理</button> </li>
-                </form>
-                <form action = "/recipeSearch", method = "GET">
-                    <li> <button type = "submit">レシピ検索</button> </li>
-                </form>
+                <li>
+                    <form action = "/", method = "GET">
+                        <button type = "submit" class = "index_button">
+                            <img src = "{{url_for('static', filename = '/UI_img/'+ "list_img.png")}}" class = "list_img">
+                            食材管理
+                        </button>
+                     </form>
+                </li>
 
-                    <li><br><br></li>
+                <li>
+                    <form action = "/recipeSearch", method = "GET">
+                        <button type = "submit" class = "search_button">
+                            <img src = "{{url_for('static', filename = '/UI_img/'+ "search_img.png")}}" class = "search_img"> 
+                            レシピ検索
+                        </button> 
+                    </form>
+                </li>
 
-                <form action = "/login", methid = "GET">
-                    <li> <button type = "submit">ログアウト</button> </li>
-                </form>
+            <li><br><br><br></li>
+
+                <li>
+                    <form action = "/login", methid = "GET">
+                         <button type = "submit">ログアウト</button>
+                    </form>
+                </li>
             </ul>
         </aside>
 
@@ -31,5 +48,6 @@
             {% block body %}{% endblock %}
         </div>
     </div>
+
 </body>
 </html>

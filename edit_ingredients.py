@@ -62,13 +62,15 @@ def editIngredient(id, ingredients, is_delete):
         
         threshold = 0.7  # 近似度の閾値（0から1の間） カンの数値
 
+        # 現在の日付を取得
+        current_date = datetime.now()
         for ingredient in ingredients:
             name = to_romaji(ingredient['name'])
+            ingredient['expiry_date'] = current_date.strftime('%Y/%m/%d')
             for key in csv_data:
                 similarity = Levenshtein.ratio(key, name)
                 if similarity >= threshold:  # 近似度をチェック
-                    # 現在の日付を取得
-                    current_date = datetime.now()
+                    
                     # CSVファイルのデータを日、月、年に変換
                     days_to_add = csv_data[key]
                     years = days_to_add // 365
@@ -79,30 +81,33 @@ def editIngredient(id, ingredients, is_delete):
                     # 新しいexpiry_dateを元の形式に変換して更新
                     ingredient['expiry_date'] = new_expiry_date.strftime('%Y/%m/%d')
                     break  # 最初に一致したものを使用
+            if ingredient['expiry_date'] == current_date.strftime('%Y/%m/%d'):
+                ingredient['expiry_date'] = '賞味期限なし'
+                
             new_ingredients.append(ingredient)
 
-        # print(new_ingredients)
+        print(new_ingredients)
 
-        dbAddIngredient(id, new_ingredients)
+        # dbAddIngredient(id, new_ingredients)
     else:  # 削除なら
         dbDeleteIngredient(id, ingredients)
 #テストデータ
-# # ingredients = [
-# #             {
-# #                 #本来は"name" : "food_name",
-# #                 "name": "砂糖",
-# #                 "quantity": 5,
-# #                 "unit":"個",
-# #                 "expiry_date" : "2024/07/09"
-# #             },
-# #             {
-# #                 "name": "豚肉",
-# #                 "quantity": 100,
-# #                 "unit":"g",
-# #                 "expiry_date" : "2024/07/09"
-# #             }
-# #         ]
-# editIngredient("2", ingredients, False)
+ingredients = [
+            {
+                #本来は"name" : "food_name",
+                "name": "ウンチ",
+                "quantity": 5,
+                "unit":"個",
+                "expiry_date" : "2024/07/09"
+            },
+            {
+                "name": "トマト",
+                "quantity": 1,
+                "unit":"pc",
+                "expiry_date" : "2024/06/12"
+            }
+        ]
+editIngredient("2", ingredients, False)
 
 #mockでテスト
 '''

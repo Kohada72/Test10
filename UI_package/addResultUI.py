@@ -24,6 +24,5 @@ def addResultUI():
         })
     id = session["user_id"]
     is_delete = False #削除ではなくて追加のメソッドを読み出す
-    print(names)
     editIngredient(id, ingredients, is_delete) #本来は追加処理をした後に結果を表示する
     return render_template('result.html', ingredients=ingredients)

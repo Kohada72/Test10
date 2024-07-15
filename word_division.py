@@ -79,7 +79,7 @@ def isIngredient(word, threshold=0.7):  #cc.ja.300なら0.45, ja_100なら0.7
 
 #キーワードの抽出
 def extractKeywords(word):
-    pattern = r'[*＊〇◎☆¥#!()【】a-zA-Z0-9０-９]'
+    pattern = r'[*＊※〇◎☆¥#!()【】a-zA-Z0-9０-９]'
     phrase = re.sub(pattern, '', word)
     for modifier in modifiers:
         phrase = phrase.replace(modifier, "")

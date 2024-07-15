@@ -5,12 +5,16 @@
 {% endblock %}
 
 {% block body %}
-    <h1>レシピ一覧</h1>
+    <h1 class = "title">レシピ一覧</h1>
+
     <ul class = "recipe_list">
     {% for i in rcl %}
     <li>
         <a href = "{{ url_for('recipeDetail',uri = i.recipe_uri) }}">
-            <img src = "{{url_for('static', filename = '/images/'+ i.recipe_uri + '.jpeg')}}" alt="画像"> 
+            <img src = "{{url_for('static', filename = '/images/'+ i.recipe_uri + '.jpeg')}}"
+             onerror = "this.onerror = null; this.src = '{{url_for('static', filename = 'UI_img/default_img.png') }}' ;"
+             class = "recipe_img"
+             > 
         </a>
         <p>{{i.recipe_name}}</p>
     </li>

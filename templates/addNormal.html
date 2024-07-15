@@ -2,12 +2,12 @@
 {%extends 'base.html'%}
 
 {% block body %}
-<h1>テキストボックス追加</h1>
+<h1 class = "title">テキストボックス追加</h1>
 <form id="textBoxForm" action="/addResult" method="post">
 
     <!-- 画像解析から取得した食材 -->
     {% for ingredient in ingredients%}
-    <div class="form-group">
+    <div class="form_group">
         <label>食材名: </label>
         <input type="text" id="name" name="name" required minlength="1" maxlength="10" size="10" value = {{ingredient.name}} />
             
@@ -20,19 +20,24 @@
     {% endfor %}
 
     <!-- 最初の入力フィールドセット -->
-    <div class="form-group">
+    <div class="form_group">
         <label>食材名: </label>
         <input type="text" id="name" name="name" required minlength="1" maxlength="10" size="10" />
-        
+        <br>
+
         <label>食材の量: </label>
         <input type="number" id="quantity" name="quantity" required minlength="1" maxlength="4" size="10" />
-        
+        <br>
+
         <label>食材の単位: </label>
         <input type="text" id="unit" name="unit" required minlength="1" maxlength="4" size="10" />
+        <br>
+
+        <button type = "button" class = "form_delete_button" onclick = "remove_form(this)">削除</button>
     </div>
 
     <!-- ボタンのコンテナ -->
-    <div class="button-container">
+    <div class="button_container">
         <button type="button" class="add-button" onclick="addTextBoxes()">テキストボックスを追加</button>
         <input type="submit" class="submit-button" value="完了">
     </div>
@@ -48,7 +53,7 @@
 
         // 新しい入力フィールドセットを作成
         const formGroup = document.createElement("div");
-        formGroup.className = "form-group";
+        formGroup.className = "form_group";
 
         const nameLabel = document.createElement("label");
         nameLabel.innerHTML = "食材名: ";
@@ -64,7 +69,7 @@
         const quantityLabel = document.createElement("label");
         quantityLabel.innerHTML = "食材の量: ";
         const quantityBox = document.createElement("input");
-        quantityBox.type = "text";
+        quantityBox.type = "number";
         quantityBox.id = "quantity";
         quantityBox.name = "quantity";
         quantityBox.required = true;
@@ -83,15 +88,34 @@
         unitBox.maxLength = 4;
         unitBox.size = 10;
 
+        const form_delete_button = document.createElement("button");
+        form_delete_button.type = "button";
+        form_delete_button.className = "form_delete_button";
+        form_delete_button.innerHTML = "削除";
+        form_delete_button.onclick = function(){
+            remove_form(this);
+        };
+
+        const br1 = document.createElement("br");
+        const br2 = document.createElement("br");
+
         formGroup.appendChild(nameLabel);
         formGroup.appendChild(nameBox);
+        formGroup.appendChild(br1);
         formGroup.appendChild(quantityLabel);
         formGroup.appendChild(quantityBox);
+        formGroup.appendChild(br2);
         formGroup.appendChild(unitLabel);
         formGroup.appendChild(unitBox);
+        formGroup.appendChild(form_delete_button);
 
         // フォームの完了ボタンの前に新しい入力フィールドセットを挿入
-        form.insertBefore(formGroup, document.querySelector('.button-container'));
+        form.insertBefore(formGroup, document.querySelector('.button_container'));
+    }
+
+    function remove_form(button){
+        const formGroup = button.parentElement;
+        formGroup.remove();
     }
 </script>
 {%endblock%}

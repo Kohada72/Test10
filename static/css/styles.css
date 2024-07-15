@@ -215,7 +215,7 @@ button:hover{
     padding-left: 5%;
 }
 
-.index_title{
+.title{
     text-align: center;
     text-decoration: underline;
 
@@ -297,15 +297,21 @@ button:hover{
 
 /* *****編集モードのスタイル***** */
 
-/* *****食材追加画面のスタイル***** */
+/* *****レシピ検索画面のスタイル***** */
 
-.add_options button{
-    width: 40%;
-    height: 400px;
-    float: left;
+.recipe_search_button button{
+    position: fixed;
+
+    left: 5px;
+    bottom: 5%;
+
+    border: 2px solid;
+    border-radius:50%;
+    width: 20vw;
+    height: 20vw;
+    max-width:100px;
+    max-height:100px;
 }
-
-/* *****食材追加画面のスタイル***** */
 
 /* *****レシピ一覧画面のスタイル***** */
 
@@ -319,16 +325,101 @@ button:hover{
     list-style: none;
     border: 1px solid;
     padding: 5px 20px;
+    
     background-color: rgb(134, 135, 135);
+    
     text-align:center;
+    font-size: 1%;
+
+    width: 15vw;
+    height: auto;
 }
 
-.recipe_list img{
-    width: 250px;
+.recipe_img{
+    width: 14vw;
     height: auto;
 }
 
 /* *****レシピ一覧画面のスタイル***** */
 
+/* *****レシピ詳細画面のスタイル***** */
+
+.recipe_detail{
+    background-color: #fefee5;
+
+    padding-left: 2vw;
+    padding-right: 2vw;
+    padding-bottom: 2vh;
+
+    margin-right: 20px;
+
+    font-size: min(2.5vw, 20px);
+
+    border: 1px solid;
+}
+
+.recipe_title{
+
+    margin-left: 10%;
+    margin-right: 10%;
+
+    text-align: center;
+
+    border: 5px dotted;
+
+    background: linear-gradient(to right, rgb(146, 245, 148), rgb(189, 222, 90));
+}
+
+.recipe_detail_img{
+    margin: auto;
+    display: block;
+
+    width: 40vw;
+    margin-bottom: 10px;
+
+    border: 1px solid;
+}
+
+.recipe_ingredients{
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+}
+.recipe_ingredient{
+    margin-bottom: 10px;
+}
+
+.recipe_instract{
+    display: flex;
+    
+    gap: 5px;
+}
+
+/* *****レシピ詳細画面のスタイル***** */
+
+/* *****食材追加方法の選択画面のスタイル***** */
+
+.add_options {
+    display: flex;
+    gap:10px;
+    height: 30vw;
+}
+
+.add_option{
+    flex-basis: 30vw;
+}
+.add_option button{
+    width: 100%;
+    height: 100%;
+}
+
+/* *****食材追加方法の選択画面のスタイル***** */
+
+/* *****手動入力追加の画面***** */
+
+.form_group{
+    border-bottom: 1px solid;
+}
+
+/* *****手動入力追加の画面***** */
 
 

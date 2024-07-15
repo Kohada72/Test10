@@ -4,7 +4,7 @@ html{
     width: 100%;
 }
 
-body {
+.body2 {
     font-family: Arial, sans-serif;
     height: 100%;
     width: 100%;
@@ -25,6 +25,18 @@ body {
     width: 100%;
     height: 100%;
     gap: 2vw;
+}
+
+.title{
+    text-align: center;
+    text-decoration: underline;
+
+    background-color: rgb(240, 239, 239);
+
+    border: 1px solid;
+
+    margin-left: 15%;
+    margin-right: 15%;
 }
 
 /*サイドバー*/
@@ -118,7 +130,7 @@ button:hover{
 
 
 /* *****ログイン画面のスタイル***** */
-.login-body{
+.login-body {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -213,16 +225,6 @@ button:hover{
 
 .ingredient_list p{
     padding-left: 5%;
-}
-
-.title{
-    text-align: center;
-    text-decoration: underline;
-
-    background-color: rgb(240, 239, 239);
-
-    margin-left: 15%;
-    margin-right: 15%;
 }
 
 .ref_img{
@@ -418,6 +420,31 @@ button:hover{
 
 .form_group{
     border-bottom: 1px solid;
+}
+
+.button_container{
+    margin-top: 10px;
+    margin-left: 10vw;
+
+    display: flex;
+    gap: 10px;
+
+    width: 50vw;
+    height: 15vh;
+}
+.button_container button{
+    flex-basis: 100%;
+}
+
+.to_reco_img{
+    width: 50vw;
+    height: 50px;
+    margin-left: 10vw;
+    margin-top: 30px;
+}
+.to_reco_img button{
+    width: 100%;
+    height: 100%;
 }
 
 /* *****手動入力追加の画面***** */

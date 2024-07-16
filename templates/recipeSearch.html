@@ -1,12 +1,16 @@
 ﻿{% extends 'base.html' %}
 {% block body %}
 
-<h1>レシピ検索</h1>
+<h1 class = "title">レシピ検索</h1>
 <br>
 <p>検索する食材を選んでください。</p>
 
 <form method="POST" action="/recipeList">
     
+    <div class = "recipe_search_button">
+        <button type="submit">検索</button>
+    </div>
+
     <div class = "ingredient_list">
         <ul>
             {% for ingredient in ingredients %}
@@ -17,10 +21,6 @@
             </li>
             {% endfor %}
         </ul>
-    </div>
-    
-    <div class = "search_button">
-        <button type="submit">検索</button>
     </div>
 </form>
 

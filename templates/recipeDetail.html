@@ -1,15 +1,35 @@
 ﻿{% extends 'base.html' %}
 
 {% block body %}
-    <h1>{{ recipe.recipe_name }}</h2>
+    <div class = "recipe_detail">
+        
+        <br>
+        <h1 class = "recipe_title">{{ recipe.recipe_name }}</h2>
+
+        <img src = "{{url_for('static', filename = '/images/'+ recipe.recipe_uri + '.jpeg')}}"
+        onerror = "this.onerror = null; this.src = '{{url_for('static', filename = 'UI_img/default_img.png') }}' ;"
+        class = "recipe_detail_img"
+        > 
+
+        <div class = "recipe_ingredients">
+            <h2>材料</h2>
+            {% for i in recipe.ingredient_list%}
+                <div class = "recipe_ingredient">{{i | replace('「', '') | replace('」', '')}} : {{recipe.ingredient_list[i]}}</div>
+            {% endfor %}
+        </div>
+    
+        <div class = "recipe_instracts">
+            <h2>手順</h2>
+            
+            {% for i in recipe.instracts %}
+                <div class = "recipe_instract">
+                    <p>{{i[0]}}:</p>
+                    <p>{{i[1:]}}</p>
+                </div>
+            {% endfor %}
+        </div>
+    
+    </div>
+
     <br>
-
-    <h2>材料</h2>
-    <p>{{recipe.ingredient_list}}</p>
-
-    <h2>手順</h2>
-    {% for i in recipe.instracts %}
-        <p>{{i}}</p>
-    {% endfor %}
-
 {% endblock %}

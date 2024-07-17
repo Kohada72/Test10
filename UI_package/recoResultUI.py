@@ -1,6 +1,6 @@
 ﻿from flask import Flask, render_template, request, redirect,app
 import os
-from imageAnalysis import imageAnalysis
+#from imageAnalysis import imageAnalysis
 
 '''-------------------------------------------------------------------- 
 Function Name       : resultUI
@@ -24,14 +24,14 @@ def recoResultUI():
         return redirect("/imageReco")
     #正常なアップロードの場合、画像解析に渡す
     if file:
-        filepath = os.path.join("uploads", "analysis.jpeg")
+        filepath = os.path.join("uploads", "analysis." + file.filename.rsplit('.', 1)[1].lower())
         file.save(filepath)
     
     
         #食材のデータを画像解析からもらう関数
         
-        ingredient_list = imageAnalysis(filepath)
-        
-        
+        #ingredient_list = imageAnalysis(filepath)
+        # 
+        ingredient_list = []
         
         return render_template("addNormal.html", ingredients = ingredient_list )    

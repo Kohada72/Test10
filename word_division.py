@@ -33,12 +33,12 @@ import re
 ingredients_list = [
     "りんご", "バナナ", "にんじん", "トマト", "じゃがいも", "レタス", "たまねぎ", "にんにく",
     "鶏", "牛", "豚", "肉", "魚", "米", "パスタ", "パン", "チーズ", "牛乳",
-    "卵", "バター", "塩", "胡椒", "砂糖", "蜂蜜", "ぶり", "鮭"
+    "卵", "バター", "塩", "胡椒", "砂糖", "蜂蜜", "鮭", "オレンジ", "豆腐"
 ]
 
 #未知語のリスト
 unknown_list = [
-    "にら"
+    "にら", "トウフ"
 ]
 
 #除外語リスト
@@ -61,7 +61,7 @@ def cosineSimilarity(vec1, vec2):
     return dot_product / (norm_vec1 * norm_vec2)
 
 #食材判定関数
-def isIngredient(word, threshold=0.7):  #cc.ja.300なら0.45, ja_100なら0.7
+def isIngredient(word, threshold=0.67):  #cc.ja.300なら0.45, ja_100なら0.67
     for j in range(1, len(word) + 1):
         res = [word[i:i+j] for i in range(0, len(word) + 1 - j)]
         for text in res:

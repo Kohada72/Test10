@@ -46,10 +46,12 @@ modifiers = [
     "釣", " ", "　"
 ]
 
-#初期化
-model_path = "./models/ja_100.bin"  #cc.ja.300 or ja_100
-model = fasttext.load_model(model_path)  #モデルのロード
-ingredient_vectors = {ingredient: model.get_word_vector(ingredient) for ingredient in ingredients_list}  #ベクトルの事前計算
+#モデルのロード・キャッシュ保存
+def loadModel():
+    global model, ingredient_vectors
+    model_path = "./models/ja_100.bin"  #cc.ja.300 or ja_100
+    model = fasttext.load_model(model_path)  #モデルのロード
+    ingredient_vectors = {ingredient: model.get_word_vector(ingredient) for ingredient in ingredients_list}  #ベクトルの事前計算
 
 #類似度計算関数
 def cosineSimilarity(vec1, vec2):

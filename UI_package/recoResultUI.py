@@ -1,6 +1,6 @@
 ﻿from flask import Flask, render_template, request, redirect,app
 import os
-#from imageAnalysis import imageAnalysis
+from imageAnalysis import imageAnalysis
 
 '''-------------------------------------------------------------------- 
 Function Name       : resultUI
@@ -32,6 +32,6 @@ def recoResultUI():
         
         #ingredient_list = imageAnalysis(filepath)
         # 
-        ingredient_list = []
+        #ingredient_list = []
         
         return render_template("addNormal.html", ingredients = ingredient_list )    

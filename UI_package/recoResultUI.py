@@ -30,7 +30,7 @@ def recoResultUI():
     
         #食材のデータを画像解析からもらう関数
         
-        #ingredient_list = imageAnalysis(filepath)
+        ingredient_list = imageAnalysis(filepath)
         # 
         #ingredient_list = []
         

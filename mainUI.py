@@ -1,6 +1,7 @@
 ﻿from flask import Flask, render_template, request, redirect, session, flash
 from UI_package import recipeListUI, addFoodUI, addResultUI, deleteIngredientsUI, edit_modeUI, foodManagementUI, \
     imageRecognitionUI, loginUI, normalWayUI, recipeDetailUI, recoResultUI, recipeSearchUI,signupUI
+from word_division import loadModel
 
 '''-------------------------------------------------------------------- 
 Function Name       : MainUI
@@ -17,6 +18,9 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 
 #セッションのデータを暗号化
 app.secret_key = '1B10'
+
+#モデルのロード・キャッシュ保存
+loadModel()
 
 #ページのルート設定
  

@@ -11,18 +11,10 @@ V1.0 : 上之山将太  2024.06.27  初期バージョン
 V1.1 : 和田一真    2024.07.01  関数(getRecipeId, getRecipeData)仕様変更, 処理の最適化
 V1.2 : 和田一真    2024.07.09  関数(getRecipeId)の検索機能の強化
 """
-"""Requirement
-fuzzywuzzy         0.18.0
-Levenshtein        0.25.1
-pymongo            4.8.0
-python-Levenshtein 0.25.1
-rapidfuzz          3.9.4
-"""
 
 from pymongo import MongoClient
 from pymongo.errors import DuplicateKeyError
 from word_division import getWordVec, cosineSimilarity
-#from fuzzywuzzy import fuzz
 
 uri = "mongodb+srv://web_server:h5vaahiG7WmtrgEN@cluster0.16pm7pd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"  #環境依存
 client = MongoClient(uri)
@@ -39,30 +31,24 @@ Return          : recipe_id_list レシピのIDのリスト
 ----------------------------------------------------------------------"""
 def getRecipeId(ingredient_name):
     recipe_id_list = []
-    threshold = 0.5
+    threshold = 0.67
     all_recipes = collection.find()
     for recipe in all_recipes:
         ingredients = recipe.get("ingredients", [])
-        #find = False
+        find = False
         for ingredient in ingredients:
             tmp_ing = ingredient["ingredient_ro"]
-            vec1 = getWordVec(tmp_ing)
-            vec2 = getWordVec(ingredient_name)
-            sim = cosineSimilarity(vec1, vec2)
-            if sim >= threshold:
-                recipe_id_list.append(recipe.get("_id"))
-                break
-            """
             dif = abs(len(tmp_ing) - len(ingredient_name))
             for i in range(dif + 1):
                 sli_ing = tmp_ing[i : (i + len(ingredient_name)) if len(ingredient_name) < len(tmp_ing) else len(tmp_ing)]
-                sim_score = fuzz.ratio(sli_ing, ingredient_name)
-                if sim_score >= 70:
+                vec1 = getWordVec(sli_ing)
+                vec2 = getWordVec(ingredient_name)
+                sim_score = cosineSimilarity(vec1, vec2)
+                if sim_score >= threshold:
                     recipe_id_list.append(recipe.get("_id"))
                     find = True
             if find:
                 break
-            """
 
     return recipe_id_list
 

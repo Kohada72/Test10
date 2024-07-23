@@ -23,13 +23,19 @@ from pymongo import MongoClient
 from pymongo.errors import DuplicateKeyError
 from fuzzywuzzy import fuzz
 
-#データベースアクセス
 uri = "mongodb+srv://web_server:h5vaahiG7WmtrgEN@cluster0.16pm7pd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"  #環境依存
 client = MongoClient(uri)
 dbname = client['user_management_list']
 collection = dbname['recipes_collection']
 
-#特定の食材を材料に持つ料理のレシピのIDを取得する関数
+"""----------------------------------------------------------------------
+Function Name   : getRecipeId
+Designer        : 和田一真
+Date            : 2024.07.15
+Function        : 食材名の配列からそれを含んだレシピのIDの配列を取得する.
+Argument        : ingredient_name 食材名の配列
+Return          : recipe_id_list レシピのIDのリスト
+----------------------------------------------------------------------"""
 def getRecipeId(ingredient_name):
     recipe_id_list = []
     all_recipes = collection.find()
@@ -50,7 +56,14 @@ def getRecipeId(ingredient_name):
 
     return recipe_id_list
 
-#該当するレシピを返す関数
+"""----------------------------------------------------------------------
+Function Name   : getRecipeData
+Designer        : 和田一真
+Date            : 2024.07.15
+Function        : レシピのIDリストからレシピの内容を取得する.
+Argument        : all_object_id レシピのIDの配列
+Return          : recipes レシピデータのリスト
+----------------------------------------------------------------------"""
 def getRecipeData(all_object_id):
     recipes = []
     all_recipes = collection.find()
@@ -60,9 +73,3 @@ def getRecipeData(all_object_id):
                 recipes.append(recipe)
 
     return recipes
-
-"""
-テストコード
-recipe_id_list = getRecipeId("mitsuba")
-print(getRecipeData(recipe_id_list))
-"""

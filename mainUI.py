@@ -1,15 +1,20 @@
-﻿from flask import Flask, render_template, request, redirect, session, flash
-from UI_package import recipeListUI, addFoodUI, addResultUI, deleteIngredientsUI, edit_modeUI, foodManagementUI, \
-    imageRecognitionUI, loginUI, normalWayUI, recipeDetailUI, recoResultUI, recipeSearchUI,signupUI
-
-'''-------------------------------------------------------------------- 
+﻿'''-------------------------------------------------------------------- 
 Function Name       : MainUI
 Designer            : 人見 淳史
-Date                : 2024.05.25
+Date                : 2024.06.28
 Function            : 各画面の遷移を実行するモジュールを呼び出し,画面遷移を管理する。
 Argument            : なし
 Return              : なし
 ----------------------------------------------------------------------'''
+
+from flask import Flask, render_template, request, redirect, session, flash
+from UI_package import recipeListUI, addFoodUI, addResultUI, deleteIngredientsUI, edit_modeUI, foodManagementUI, \
+    imageRecognitionUI, loginUI, normalWayUI, recipeDetailUI, recoResultUI, recipeSearchUI,signupUI
+from word_division import loadModel
+
+
+
+
 
 #アプリケーションのセットアップ
 app = Flask(__name__, static_folder='./static/')
@@ -17,6 +22,9 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 
 #セッションのデータを暗号化
 app.secret_key = '1B10'
+
+#モデルのロード・キャッシュ保存
+loadModel()
 
 #ページのルート設定
  

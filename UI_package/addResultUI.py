@@ -1,6 +1,4 @@
-﻿from flask import Flask, render_template, request, session
-from edit_ingredients import editIngredient
-'''-------------------------------------------------------------------- 
+﻿'''-------------------------------------------------------------------- 
 Function Name       : normalResult
 Designer            : 上之山 将太
 Date                : 2024.06.02
@@ -8,6 +6,8 @@ Function            : W5 追加確認画面を表示する
 Argument            : なし
 Return              : render_template('result.html', food_name = name, quantity = quantity, unit = unit)
 ----------------------------------------------------------------------'''
+from flask import Flask, render_template, request, session
+from edit_ingredients import editIngredient
 
 def addResultUI():
     ingredients = []

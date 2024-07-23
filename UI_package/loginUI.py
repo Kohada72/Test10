@@ -1,6 +1,4 @@
-﻿from userAuthentication import userAuthentication
-
-'''-------------------------------------------------------------------- 
+﻿'''-------------------------------------------------------------------- 
 Function Name       : loginUI
 Designer            : 人見淳史
 Date                : 2024.05.29
@@ -8,6 +6,8 @@ Function            : W1 ログイン画面を表示する
 Argument            : なし
 Return              : login_result
 ----------------------------------------------------------------------'''
+from userAuthentication import userAuthentication
+
 #ログイン画面表示処理
 def loginUI(userID, passward):
     

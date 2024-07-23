@@ -21,7 +21,8 @@ rapidfuzz          3.9.4
 
 from pymongo import MongoClient
 from pymongo.errors import DuplicateKeyError
-from fuzzywuzzy import fuzz
+from word_division import getWordVec, cosineSimilarity
+#from fuzzywuzzy import fuzz
 
 uri = "mongodb+srv://web_server:h5vaahiG7WmtrgEN@cluster0.16pm7pd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"  #環境依存
 client = MongoClient(uri)
@@ -38,12 +39,20 @@ Return          : recipe_id_list レシピのIDのリスト
 ----------------------------------------------------------------------"""
 def getRecipeId(ingredient_name):
     recipe_id_list = []
+    threshold = 0.5
     all_recipes = collection.find()
     for recipe in all_recipes:
         ingredients = recipe.get("ingredients", [])
-        find = False
+        #find = False
         for ingredient in ingredients:
             tmp_ing = ingredient["ingredient_ro"]
+            vec1 = getWordVec(tmp_ing)
+            vec2 = getWordVec(ingredient_name)
+            sim = cosineSimilarity(vec1, vec2)
+            if sim >= threshold:
+                recipe_id_list.append(recipe.get("_id"))
+                break
+            """
             dif = abs(len(tmp_ing) - len(ingredient_name))
             for i in range(dif + 1):
                 sli_ing = tmp_ing[i : (i + len(ingredient_name)) if len(ingredient_name) < len(tmp_ing) else len(tmp_ing)]
@@ -53,6 +62,7 @@ def getRecipeId(ingredient_name):
                     find = True
             if find:
                 break
+            """
 
     return recipe_id_list
 

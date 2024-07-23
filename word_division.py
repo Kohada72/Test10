@@ -1,6 +1,6 @@
 ﻿"""----------------------------------------------------------------------
 File Name       : word_division.py
-Version         : V1.4
+Version         : V1.5
 Designer        : 和田一真
 Date            : 2024.06.09
 Purpose         : レシート画像の解析データから食材名の抽出をする。
@@ -12,6 +12,7 @@ V1.1 : 和田一真  2024.06.18  制御用関数(wordDivision)追加
 V1.2 : 和田一真  2024.07.13  非ASCII環境対応
 V1.3 : 和田一真  2024.07.13  高効率モデル(ja_100)にも対応
 V1.4 : 和田一真  2024.07.14  wordDivisionの戻り値をdictへ変更
+V1.5 : 和田一真  2024.07.23  単語ベクトル取得用関数(getWordVec)追加
 """
 
 import fasttext
@@ -45,6 +46,17 @@ def loadModel():
     model_path = "./models/ja_100.bin"  #cc.ja.300 or ja_100
     model = fasttext.load_model(model_path)  #モデルのロード
     ingredient_vectors = {ingredient: model.get_word_vector(ingredient) for ingredient in ingredients_list}  #ベクトルの事前計算
+
+"""----------------------------------------------------------------------
+Function Name   : getWordVec
+Designer        : 和田一真
+Date            : 2024.07.23
+Function        : 与えられた単語のベクトルを返す．
+Argument        : text 単語
+Return          : vec 単語に対応するベクトル
+----------------------------------------------------------------------"""
+def getWordVec(text):
+    return model.get_word_vector(text)
 
 """----------------------------------------------------------------------
 Function Name   : cosineSimilarity

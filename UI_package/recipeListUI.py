@@ -1,9 +1,4 @@
-﻿#import recipeSearchModule
-from flask import Flask, render_template,request,session
-from collect_recipe_data import getRecipe, RECIPE
-import pykakasi
-
-'''-------------------------------------------------------------------- 
+﻿'''-------------------------------------------------------------------- 
 Function Name       : recipeListUI
 Designer            : 人見 淳史
 Date                : 2024.06.04
@@ -11,6 +6,10 @@ Function            : 検索で得られたレシピの一覧の画面を表示�
 Argument            : なし
 Return              : render_template('recipe_list.html', rcl = recipe_lsit)
 ----------------------------------------------------------------------'''
+from flask import Flask, render_template
+from collect_recipe_data import getRecipe, RECIPE
+import pykakasi
+
 
 #レシピ一覧画面表示処理
 def recipeListUI(ingredient_list):

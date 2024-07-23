@@ -1,7 +1,4 @@
-﻿from flask import Flask, render_template
-from collect_recipe_data import getRecipeFromUri, RECIPE
-
-'''-------------------------------------------------------------------- 
+﻿'''-------------------------------------------------------------------- 
 Function Name       : recipeDetailUI
 Designer            : 人見 淳史
 Date                : 2024.06.06
@@ -9,6 +6,8 @@ Function            : レシピの詳細な情報を表示する画面に遷移
 Argument            : なし
 Return              : render_template('recipeDetail.html', recipe = recipe)
 ----------------------------------------------------------------------'''
+from flask import Flask, render_template
+from collect_recipe_data import getRecipeFromUri, RECIPE
 
 def recipeDetailUI(uri):
     

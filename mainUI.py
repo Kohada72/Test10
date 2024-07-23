@@ -6,11 +6,13 @@ from word_division import loadModel
 '''-------------------------------------------------------------------- 
 Function Name       : MainUI
 Designer            : 人見 淳史
-Date                : 2024.05.25
+Date                : 2024.06.28
 Function            : 各画面の遷移を実行するモジュールを呼び出し,画面遷移を管理する。
 Argument            : なし
 Return              : なし
 ----------------------------------------------------------------------'''
+
+
 
 #アプリケーションのセットアップ
 app = Flask(__name__, static_folder='./static/')

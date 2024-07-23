@@ -10,7 +10,12 @@ Function            : 画像認証に使う画像のアップロードをし、�
 Argument            : なし
 Return              : render_template('result.html', food_name = name, quantity = quantity, unit = unit)
 ----------------------------------------------------------------------'''
-#画像をデータベースにアップロードする関数が分からないのでいったん自分のPCに保存する
+
+from flask import Flask, render_template, request, redirect,app
+import os
+#from imageAnalysis import imageAnalysis
+
+
 
 def recoResultUI():
     #ファイル無しはもう一度
@@ -31,7 +36,6 @@ def recoResultUI():
         #食材のデータを画像解析からもらう関数
         
         ingredient_list = imageAnalysis(filepath)
-        # 
-        #ingredient_list = []
+ 
         
         return render_template("addNormal.html", ingredients = ingredient_list )    

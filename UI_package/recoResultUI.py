@@ -1,4 +1,8 @@
-﻿'''-------------------------------------------------------------------- 
+﻿from flask import Flask, render_template, request, redirect,app
+import os
+from imageAnalysis import imageAnalysis
+
+'''-------------------------------------------------------------------- 
 Function Name       : resultUI
 Designer            : 上之山 将太
 Date                : 2024.05.27
@@ -29,8 +33,10 @@ def recoResultUI():
         file.save(filepath)
     
     
-        #食材のデータを画像解析からもらう
-        #ingredient_list = imageAnalysis(filepath)
-        ingredient_list = []
+        #食材のデータを画像解析からもらう関数
+        
+        ingredient_list = imageAnalysis(filepath)
+        # 
+        #ingredient_list = []
         
         return render_template("addNormal.html", ingredients = ingredient_list )    

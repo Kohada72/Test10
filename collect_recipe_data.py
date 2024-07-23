@@ -20,6 +20,14 @@ class RECIPE:
         self.ingredient_list = {}
         self.instracts = []
 
+"""----------------------------------------------------------------------
+Function Name   : getRecipe
+Designer        : 和田一真
+Date            : 2024.07.15
+Function        : 食材名のリストから該当するレシピを抽出し, 表示する形式に変換したリストで出力する.
+Argument        : ingredient_names 食材名の配列
+Return          : recipe_list レシピのデータのリスト
+----------------------------------------------------------------------"""
 def getRecipe(ingredient_names):
     tmp_id_list = []
     for i, name in enumerate(ingredient_names):
@@ -28,9 +36,9 @@ def getRecipe(ingredient_names):
     flat_id_list = [id for sub in tmp_id_list for id in sub]
     flat_id_list = list(set(flat_id_list))
     if len(flat_id_list) >= 20:
-        get_id_list = flat_id_list[:20]
+        get_id_list = flat_id_list[ : 20]
     else:
-        get_id_list = flat_id_list[:len(flat_id_list)]
+        get_id_list = flat_id_list[ : len(flat_id_list)]
 
     recipe_list = []
     for data in getRecipeData(get_id_list):
@@ -49,6 +57,14 @@ def getRecipe(ingredient_names):
 
     return recipe_list
 
+"""----------------------------------------------------------------------
+Function Name   : getResipeFromUri
+Designer        : 和田一真
+Date            : 2024.07.15
+Function        : URIからレシピの単体のデータを取得.
+Argument        : uri レシピURI
+Return          : recipe レシピのデータ
+----------------------------------------------------------------------"""
 def getRecipeFromUri(uri):    
     id = [ObjectId(uri)]
     recipe_data = getRecipeData(id)[0]

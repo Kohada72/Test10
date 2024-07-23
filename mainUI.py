@@ -1,9 +1,4 @@
-﻿from flask import Flask, render_template, request, redirect, session, flash
-from UI_package import recipeListUI, addFoodUI, addResultUI, deleteIngredientsUI, edit_modeUI, foodManagementUI, \
-    imageRecognitionUI, loginUI, normalWayUI, recipeDetailUI, recoResultUI, recipeSearchUI,signupUI
-from word_division import loadModel
-
-'''-------------------------------------------------------------------- 
+﻿'''-------------------------------------------------------------------- 
 Function Name       : MainUI
 Designer            : 人見 淳史
 Date                : 2024.06.28
@@ -11,6 +6,13 @@ Function            : 各画面の遷移を実行するモジュールを呼び�
 Argument            : なし
 Return              : なし
 ----------------------------------------------------------------------'''
+
+from flask import Flask, render_template, request, redirect, session, flash
+from UI_package import recipeListUI, addFoodUI, addResultUI, deleteIngredientsUI, edit_modeUI, foodManagementUI, \
+    imageRecognitionUI, loginUI, normalWayUI, recipeDetailUI, recoResultUI, recipeSearchUI,signupUI
+from word_division import loadModel
+
+
 
 
 

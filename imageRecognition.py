@@ -122,17 +122,21 @@ def load_from_json(filename):
     response = AnnotateImageResponse.from_json(temp)
     return response
 
-#OCR結果を1行ずつソートする
-def get_sorted_lines(response,threshold = 5):
-    """Boundingboxの左上の位置を参考に行ごとの文章にParseする
-
+"""----------------------------------------------------------------------
+関数名       : ImageRecognition.py
+Designer        : 平井伸之
+Date            : 2024.07.03
+Purpose         :Boundingboxの左上の位置を参考に行ごとの文章にParseする
     Args:
         response (_type_): VisionのOCR結果のObject
         threshold (int, optional): 同じ列だと判定するしきい値
 
     Returns:
         line: list of [x,y,text,symbol.boundingbox]
-    """
+    Args:
+        path:画像のpath
+----------------------------------------------------------------------"""
+def get_sorted_lines(response,threshold = 5):
     # 1. テキスト抽出とソート
     document = response.full_text_annotation
     bounds = []
@@ -173,9 +177,16 @@ def get_sorted_lines(response,threshold = 5):
         sentence.append(texts)
     return sentence
 
-
-
+"""----------------------------------------------------------------------
+関数名       : ImageRecognition.py
+Designer        : 平井伸之
+Date            : 2024.07.03
+Purpose         : 画像の不要な部分を削除する
+    Args:
+        path:画像のpath
+----------------------------------------------------------------------"""
 def imageDataProcessing(path):
+    
     #画像読み込み
     img = cv2.imread(path)
 
@@ -243,10 +254,8 @@ def imageDataProcessing(path):
     dst = []
     pts1 = np.float32(areas[0])
     pts2 = np.float32([tmp])
-
     M = cv2.getPerspectiveTransform(pts1,pts2)
     dst = cv2.warpPerspective(img,M,(w,h))
-    
     cv2.imwrite(path,dst)
 
   

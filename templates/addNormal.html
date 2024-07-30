@@ -14,11 +14,17 @@
         <br>
 
         <label>食材の量　: </label>
-        <input type="number" id="quantity" name="quantity" required minlength="1" maxlength="4" size="10" value="{{ ingredient.quantity }}" />
+        <input type="number" id="quantity" name="quantity" required min="0.1" max="1000" style="width:100px" step = "0.1" value="{{ ingredient.quantity }}" />
         <br>
 
         <label>食材の単位: </label>
-        <input type="text" id="unit" name="unit" required minlength="1" maxlength="4" size="10" value="{{ ingredient.unit }}" oninput="validateInput(this)" />
+        <select id="unit" name="unit" required>
+            <option>個</option>
+            <option>g</option>
+            <option>束</option>
+            <option>本</option>
+            <option>丁</option>
+        </select>
         <br><br>
 
         <button type="button" class="form_delete_button" onclick="remove_form(this)">削除</button>
@@ -37,7 +43,14 @@
         <br>
 
         <label>食材の単位: </label>
-        <input type="text" id="unit" name="unit" required minlength="1" maxlength="4" size="10px" oninput="validateInput(this)" />
+        <select id="unit" name="unit" required>
+            <option>個</option>
+            <option>g</option>
+            <option>束</option>
+            <option>本</option>
+            <option>丁</option>
+        </select>
+
         <br><br>
 
         <button type="button" class="form_delete_button" onclick="remove_form(this)">削除</button>
@@ -93,21 +106,27 @@
         quantityBox.id = "quantity";
         quantityBox.name = "quantity";
         quantityBox.required = true;
-        quantityBox.minLength = 1;
-        quantityBox.maxLength = 4;
+        quantityBox.min = "0.1";
+        quantityBox.max = "1000";
         quantityBox.style = "width:100px";
+        quantityBox.step = "0.1";
 
         const unitLabel = document.createElement("label");
         unitLabel.innerHTML = "食材の単位: ";
-        const unitBox = document.createElement("input");
-        unitBox.type = "text";
+        const unitBox = document.createElement("select");
         unitBox.id = "unit";
         unitBox.name = "unit";
         unitBox.required = true;
-        unitBox.minLength = 1;
-        unitBox.maxLength = 4;
-        unitBox.size = 10;
-        unitBox.oninput = function() { validateInput(this); };
+
+        const units = ["個", "g", "束", "本", "丁"];
+        units.forEach(function(unit) {
+            const option = document.createElement("option");
+            option.value = unit;
+            option.textContent = unit;
+            unitBox.appendChild(option);
+        });
+
+
 
         const form_delete_button = document.createElement("button");
         form_delete_button.type = "button";
